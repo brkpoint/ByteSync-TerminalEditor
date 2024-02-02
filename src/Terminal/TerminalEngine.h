@@ -8,7 +8,6 @@ class TerminalEngine {
         int exitcode = 0;
         int keycode;
 
-        static int inputThread();
         void input();
     public:
         void setup();

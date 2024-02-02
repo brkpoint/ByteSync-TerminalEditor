@@ -1,27 +1,22 @@
 #include "TerminalEngine.h"
 
 void TerminalEngine::setup() {
-    system("clear");
-    cout << "hello\n";
+    system("stty raw");
 }
 
-int TerminalEngine::start() {
+int TerminalEngine::start() {   
     while(running) {
-
         input();
+        if (keycode == 13) return 0;
         onUpdate();
 
         onRender();
     }
+    system("stty cooked");
     cout << endl;
     return exitcode;
 }
 
-int TerminalEngine::inputThread() {
-    return 0;
-}
-
 void TerminalEngine::input() {
-    future<int> future = async(launch::async, inputThread);
-    keycode = future.get();
+    //todo
 }

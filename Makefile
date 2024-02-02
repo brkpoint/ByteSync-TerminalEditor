@@ -1,5 +1,5 @@
-cc=gcc
-cflags=
+cc=g++
+cflags=-std=c++11
 
 src=$(shell find ./src -name "*.cpp")
 
