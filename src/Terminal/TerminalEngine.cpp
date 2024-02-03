@@ -1,22 +1,39 @@
 #include "TerminalEngine.h"
 
-void TerminalEngine::setup() {
-    system("stty raw");
+static int keycode;
+static int lastkeycode;
+
+TerminalEngine::TerminalEngine() {
+    //system("stty raw");
+    inputManager = new TerminalInput();
+    running = true;
+    keycode = 0;
+    exitcode = 0;
 }
 
-int TerminalEngine::start() {   
+TerminalEngine::~TerminalEngine() {
+    running = NULL;
+    keycode = NULL;
+    lastkeycode = NULL;
+    exitcode = NULL;
+}
+
+int TerminalEngine::start() {
+    inputManager->openInput();
     while(running) {
-        input();
-        if (keycode == 13) return 0;
+        if (inputManager->isInputAvaiable()) keycode = inputManager->readInput();
+        if (keycode == 13) return exitcode = 0;
+        if (keycode != lastkeycode) {
+            cout << keycode;
+            lastkeycode = keycode;
+        }
         onUpdate();
 
         onRender();
     }
-    system("stty cooked");
+    inputManager->closeInput();
+    delete inputManager;
+    //system("stty cooked");
     cout << endl;
     return exitcode;
-}
-
-void TerminalEngine::input() {
-    //todo
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <future>
-#include <thread>
+#include <pthread.h>
 #include <chrono>
 #include <sys/select.h>
 #include <err.h>
