@@ -6,7 +6,7 @@ void TerminalEngine::onUpdate() {
 }
 
 void TerminalEngine::onRender() {
-    cout << "a\n";
+    // cout << "a\n"; /* test */
 }
 
 int main() {
