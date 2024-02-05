@@ -32,10 +32,6 @@ void TerminalInput::closeInput() {
     system("stty cooked");
 }
 
-bool TerminalInput::isInputAvaiable() {
-    return true;
-}
-
 int TerminalInput::readInput() {
     return keycode;
 }

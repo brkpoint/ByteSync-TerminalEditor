@@ -36,7 +36,7 @@ int TerminalEngine::start() {
         onRender();
     }
     inputManager->closeInput();
-    cout << endl;
+    cout << endl << endl;
     return exitcode;
 }
 
