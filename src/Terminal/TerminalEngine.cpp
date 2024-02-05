@@ -25,7 +25,8 @@ TerminalEngine::~TerminalEngine() {
 int TerminalEngine::start() {
     inputManager->openInput();
     while(running) {
-        if (inputManager->isInputAvaiable()) {
+        //input
+        {
             keycode = inputManager->readInput();
             if (keycode == 13) return exitcode = 0;
             lastkeycode = keycode;

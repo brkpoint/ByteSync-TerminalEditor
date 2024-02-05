@@ -12,6 +12,5 @@ class TerminalInput {
         void openInput();
         void closeInput();
 
-        bool isInputAvaiable();
         int readInput();
 };
