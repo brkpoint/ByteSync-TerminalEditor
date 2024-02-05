@@ -14,7 +14,8 @@ class TerminalEngine {
         ~TerminalEngine();
 
         int start();
+        void stop();
 
-        virtual void onUpdate();
+        virtual void onUpdate(int keycode);
         virtual void onRender();
 };

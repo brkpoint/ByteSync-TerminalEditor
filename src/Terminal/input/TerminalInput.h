@@ -4,7 +4,7 @@
 
 class TerminalInput {
     private:
-
+        thread inp;
     public:
         TerminalInput();
         ~TerminalInput();

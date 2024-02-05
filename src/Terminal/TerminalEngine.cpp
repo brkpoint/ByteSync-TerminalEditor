@@ -14,7 +14,8 @@ TerminalEngine::TerminalEngine() {
 }
 
 TerminalEngine::~TerminalEngine() {
-    
+    delete inputManager;
+
     running = false;
     keycode = -1;
     lastkeycode = -1;
@@ -27,18 +28,17 @@ int TerminalEngine::start() {
         if (inputManager->isInputAvaiable()) {
             keycode = inputManager->readInput();
             if (keycode == 13) return exitcode = 0;
-            if (keycode != lastkeycode) {
-                cout << keycode;
-                lastkeycode = keycode;
-            }
+            lastkeycode = keycode;
         }
-        onUpdate();
+        onUpdate(keycode);
 
         onRender();
     }
     inputManager->closeInput();
-    delete inputManager;
-    //system("stty cooked");
     cout << endl;
     return exitcode;
+}
+
+void TerminalEngine::stop() {
+    running = false;
 }

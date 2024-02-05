@@ -1,12 +1,12 @@
 #include "incld.h"
 #include "Terminal/TerminalEngine.h"
 
-void TerminalEngine::onUpdate() {
+void TerminalEngine::onUpdate(int keycode) {
     
 }
 
 void TerminalEngine::onRender() {
-    // cout << "a\n"; /* test */
+    //cout << "a\n"; /* test */
 }
 
 int main() {
