@@ -30,9 +30,9 @@ int TerminalEngine::start() {
                 running = false;
                 continue;
             }
-            if (keycode != lastkeycode) {
+            /* if (keycode != lastkeycode) {
                 cout << (char)keycode;
-            }
+            }*/ // debug
             lastkeycode = keycode;
         }
         onUpdate(keycode); // updating after the most important things
