@@ -4,8 +4,10 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 
+#include<unistd.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <functional>
 #include <iostream>
 #include <cstdio>
 

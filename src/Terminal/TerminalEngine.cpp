@@ -1,42 +1,46 @@
 #include "TerminalEngine.h"
 
-static int keycode;
-static int lastkeycode;
+static int keycode = -1;
+static int lastkeycode = -1;
 
 TerminalEngine::TerminalEngine() {
-    //system("stty raw");
     inputManager = new TerminalInput();
 
+    // setting the default value
     running = true;
-    keycode = -1;
-    lastkeycode = -1;
     exitcode = 0;
 }
 
 TerminalEngine::~TerminalEngine() {
-    delete inputManager;
-
-    running = false;
-    keycode = -1;
-    lastkeycode = -1;
-    exitcode = 0;
+    // deleting all variables
+    delete &running;
+    delete &keycode;
+    delete &lastkeycode;
+    delete &exitcode;
 }
 
 int TerminalEngine::start() {
-    inputManager->openInput();
+    inputManager->openInput(); // creating a new thread and setting input terminal variables
+    onStart(); // call the virtual start
     while(running) {
         //input
         {
             keycode = inputManager->readInput();
-            if (keycode == 13) return exitcode = 0;
+            if (keycode == 13) {
+                running = false;
+                continue;
+            }
+            if (keycode != lastkeycode) {
+                cout << (char)keycode;
+            }
             lastkeycode = keycode;
         }
-        onUpdate(keycode);
+        onUpdate(keycode); // updating after the most important things
 
-        onRender();
+        onRender(); // rendering after most important render stuff
     }
-    inputManager->closeInput();
-    cout << endl << endl;
+    inputManager->closeInput(); // stopping the input thread and setting default terminal variables
+    cout << endl;
     return exitcode;
 }
 
