@@ -1,9 +1,11 @@
 cc=g++
 cflags=-std=c++11
+src=$(shell find src/ f -name '*.*')
 
-src=$(shell find ./src -name "*.cpp")
+all: compile clean
 
-all: a.out
+compile: $(src)
+	$(cc) $(cflags) $^
 
-a.out: $(src)
-	$(cc) $(cflags) $^ -o $@
+clean: $(shell find src/ f -name '*.h.gch')
+	rm -rf $^
