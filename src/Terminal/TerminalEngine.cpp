@@ -39,6 +39,7 @@ int TerminalEngine::start() {
 
         onRender(); // rendering after most important render stuff
     }
+    system("clear"); // clearing the terminal
     inputManager->closeInput(); // stopping the input thread and setting default terminal variables
     cout << endl;
     return exitcode;

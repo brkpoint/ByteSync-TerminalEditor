@@ -4,7 +4,7 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 
-#include<unistd.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <functional>
@@ -26,5 +26,7 @@
 
 #include <unistd.h>
 #include <curses.h>
+
+#include "utils/Vectors.h"
 
 using namespace std;
