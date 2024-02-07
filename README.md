@@ -7,4 +7,4 @@ Text or code editor in terminal (better then vim maybe)
 □ color highlithing  
 □ colors for terminal  
 □ saving and loading fles  
-□ UI
+□ UI 
