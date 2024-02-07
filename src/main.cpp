@@ -10,7 +10,7 @@ void TerminalEngine::onUpdate(int keycode) {
 }
 
 void TerminalEngine::onRender() {
-
+    print("hello\n");
 }
 
 int main() {

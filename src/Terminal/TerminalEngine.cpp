@@ -6,6 +6,16 @@ static int lastkeycode = -1;
 TerminalEngine::TerminalEngine() {
     inputManager = new TerminalInput();
 
+    // getting the height and width of the terminal in pixles and chars
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
+    widthCH = w.ws_row; // char width
+    heightCH = w.ws_col; // char height
+
+    width = w.ws_xpixel; // normal width
+    height = w.ws_ypixel; // normal height
+
     // setting the default value
     running = true;
     exitcode = 0;
@@ -17,6 +27,18 @@ TerminalEngine::~TerminalEngine() {
     delete &keycode;
     delete &lastkeycode;
     delete &exitcode;
+}
+
+void TerminalEngine::print(char ch) {
+
+}
+
+void TerminalEngine::print(const char* str) {
+
+}
+
+void TerminalEngine::print(string str) {
+    
 }
 
 int TerminalEngine::start() {
@@ -37,6 +59,7 @@ int TerminalEngine::start() {
         }
         onUpdate(keycode); // updating after the most important things
 
+        system("clear");
         onRender(); // rendering after most important render stuff
     }
     system("clear"); // clearing the terminal
