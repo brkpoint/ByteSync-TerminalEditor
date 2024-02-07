@@ -14,8 +14,14 @@ class TerminalEngine {
 
         int height;
         int width;
+
+        // those are frame buffers, we can wait for back buffer to finish drawing and swap those aka double buffering (to avoid flashes and screen tearing)
+        vector<string> frontbuffer; // current frame
+        vector<string> backbuffer; // next frame
         
         TerminalInput* inputManager;
+
+        void draw();
     public:
         TerminalEngine();
         ~TerminalEngine();
@@ -23,6 +29,7 @@ class TerminalEngine {
         int start();
         void stop();
 
+        void clear();
         void print(char ch);
         void print(const char* str);
         void print(string str);

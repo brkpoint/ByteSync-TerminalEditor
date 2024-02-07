@@ -3,6 +3,8 @@
 static int keycode = -1;
 static int lastkeycode = -1;
 
+vector<vector<string>> tempbuffer;
+
 TerminalEngine::TerminalEngine() {
     inputManager = new TerminalInput();
 
@@ -15,6 +17,16 @@ TerminalEngine::TerminalEngine() {
 
     width = w.ws_xpixel; // normal width
     height = w.ws_ypixel; // normal height
+
+    // oof code (needs a fix)
+    string empty;
+    for (int w = 0; w < widthCH - 1; w++) empty += ' ';
+
+    // initializing a front and back buffers
+    for (int h = 0; h < heightCH - 1; h++) { 
+        frontbuffer.push_back(empty);
+        backbuffer.push_back(empty);
+    }
 
     // setting the default value
     running = true;
@@ -29,6 +41,19 @@ TerminalEngine::~TerminalEngine() {
     delete &exitcode;
 }
 
+void TerminalEngine::draw() {
+    for (int h = 0; h < heightCH - 1; h++)
+        cout << frontbuffer.at(h) << endl;
+}
+
+void TerminalEngine::clear() {
+    for (int h = 0; h < heightCH - 1; h++)
+        for (int w = 0; w < widthCH - 1; w++)
+            backbuffer.at(h).at(w) = ' ';
+
+    inputManager->cursorMove(0, 0);
+}
+
 void TerminalEngine::print(char ch) {
 
 }
@@ -38,14 +63,14 @@ void TerminalEngine::print(const char* str) {
 }
 
 void TerminalEngine::print(string str) {
-    
+
 }
 
 int TerminalEngine::start() {
     inputManager->openInput(); // creating a new thread and setting input terminal variables
     onStart(); // call the virtual start
     while(running) {
-        //input
+        // input
         {
             keycode = inputManager->readInput();
             if (keycode == 13) {
@@ -59,10 +84,15 @@ int TerminalEngine::start() {
         }
         onUpdate(keycode); // updating after the most important things
 
-        system("clear");
+        // drawing
+        {
+            clear();
+        }
         onRender(); // rendering after most important render stuff
+        frontbuffer = backbuffer; // swaping buffers (kinda, we dont need the backbuffer to be swaped because we are gonna clear it anyways)
+        draw();
     }
-    system("clear"); // clearing the terminal
+    clear(); // clearing the terminal
     inputManager->closeInput(); // stopping the input thread and setting default terminal variables
     cout << endl;
     return exitcode;
