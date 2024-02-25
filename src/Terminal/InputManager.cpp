@@ -33,7 +33,7 @@ void InputManager::RunCommand(string str) {
         if (cmd->GetType() != type) continue; // if it isnt the type just skip
         if (cmd->GetCommand() == str && cmd->GetType() == type) {
             cmd->execute(); // executing
-            break;
+            return;
         }
     }
 }

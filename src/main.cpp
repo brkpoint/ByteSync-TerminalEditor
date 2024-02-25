@@ -22,8 +22,6 @@ int main(int argc, char** argv) {
         char c = getchar(); // getting the char
         running = inpMgr.Update(c); // updating and getting the output
     }
-
-    inpMgr.~InputManager();
     
     return 0;
 }
