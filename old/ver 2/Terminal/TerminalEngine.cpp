@@ -5,6 +5,10 @@ static int lastkeycode = -1;
 
 vector<vector<string>> tempbuffer;
 
+void printToCoordinates(int x, int y, string text) {
+    printf("\033[%d;%dH%s\n", x, x, text.c_str());
+}
+
 TerminalEngine::TerminalEngine() {
     inputManager = new TerminalInput();
 
@@ -43,7 +47,7 @@ TerminalEngine::~TerminalEngine() {
 
 void TerminalEngine::draw() {
     for (int h = 0; h < heightCH - 1; h++)
-        cout << frontbuffer.at(h) << endl;
+        printToCoordinates(0, h, frontbuffer.at(h));
 }
 
 void TerminalEngine::clear() {
@@ -69,6 +73,8 @@ void TerminalEngine::print(string str) {
 int TerminalEngine::start() {
     inputManager->openInput(); // creating a new thread and setting input terminal variables
     onStart(); // call the virtual start
+    system("clear"); // normal clear
+    cout << heightCH << endl << widthCH << endl;
     while(running) {
         // input
         {

@@ -1,10 +1,12 @@
 # TerminalEditor C++/C
 Text or code editor in terminal (better then vim maybe)
 ### TODO:
-- [x] asynchronous input
-- [x] input managment
-- [x] cursor managment
+- [?] road map?
+- [x] input handling
+- [?] lines
+- [x] command managment
+- [x] command execution
 - [ ] color highlithing
 - [ ] colors for terminal
-- [ ] saving and loading fles
+- [ ] saving and loading files
 - [ ] UI

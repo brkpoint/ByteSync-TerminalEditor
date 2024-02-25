@@ -1,22 +1,29 @@
 #include "incld.h"
-#include "Terminal/TerminalEngine.h"
+#include "Terminal/InputManager.h"
 
-void TerminalEngine::onStart() {
+using namespace Terminal;
 
-}
+int main(int argc, char** argv) {
+    // no files in args
+    if (argc <= 1) {
+        cout << "No file specified, exiting." << endl;
+        return 0;
+    }
 
-void TerminalEngine::onUpdate(int keycode) {
+    bool running = true;
+
+    TerminalData data = GetData(); // getting the terminal data
+    InputManager inpMgr = InputManager(data);
+
+    system("clear");
+
+    // program loop
+    while (running) {
+        char c = getchar(); // getting the char
+        running = inpMgr.Update(c); // updating and getting the output
+    }
+
+    inpMgr.~InputManager();
     
-}
-
-void TerminalEngine::onRender() {
-    print("hello\n");
-}
-
-int main() {
-    TerminalEngine* engine = new TerminalEngine();
-    int exitcode = engine->start(); // starting the terminal window, and after it stopped working getting the stop code
-    delete engine;
-
-    return exitcode;
+    return 0;
 }
