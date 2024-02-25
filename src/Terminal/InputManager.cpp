@@ -10,6 +10,21 @@ InputManager::InputManager(TerminalData data) {
             }, &running
         )
     );
+    commands.push_back(
+        CreateCommand("h", "help", "Shows all avaiable commands.", ACTION_COMMAND,
+            [](vector<CommandBase*> cmds) {
+                for (CommandBase* command : cmds) {
+                    cout << "h "
+                        << "help "
+                        << "Shows all avaiable commands." << endl;
+
+                    cout << command->GetCommand() << " "
+                        << command->GetName() << " "
+                        << command->GetDesc() << endl;
+                }
+            }, commands
+        )
+    );
 
     terminalData = data;
 }
