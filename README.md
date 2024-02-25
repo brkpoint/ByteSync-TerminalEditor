@@ -1,9 +1,9 @@
 # TerminalEditor C++/C
 Text or code editor in terminal (better then vim maybe)
 ### TODO:
-- [?] road map?
+- [ ] road map?
 - [x] input handling
-- [?] lines
+- [ ] lines
 - [x] command managment
 - [x] command execution
 - [ ] color highlithing
