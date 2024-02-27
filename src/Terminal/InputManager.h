@@ -1,4 +1,5 @@
 #include "../incld.h"
+#include "../utils/str.cpp"
 #include "Terminal.h"
 #include "Command.h"
 
@@ -6,7 +7,7 @@
 
 enum Keycodes {
     RETURN = 13,
-    BACKSPACE = 51,
+    BACKSPACE = 127,
     SHIFT = 16,
     CAPSLOCK = 20,
     TAB = 9,

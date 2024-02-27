@@ -5,14 +5,14 @@ InputManager::InputManager(TerminalData data) {
 
     commands.push_back(
         CreateCommand("q", "quit", "Quits the application.", ACTION_COMMAND,
-            [](bool *running) {
+            [](vector<string> args, bool* running) {
                 *running = false;
             }, &running
         )
     );
     commands.push_back(
         CreateCommand("h", "help", "Shows all avaiable commands.", ACTION_COMMAND,
-            [](vector<CommandBase*> cmds) {
+            [](vector<string> args, vector<CommandBase*> cmds) {
                 for (CommandBase* command : cmds) {
                     cout << "h "
                         << "help "
@@ -36,8 +36,13 @@ InputManager::~InputManager() {
 
 void InputManager::RunCommand(string str) {
     CommandType type = ND;
+    string commandName;
+    vector<string> args;
     if (str.rfind(":", 0) == 0) { // action commands
         str.erase(str.begin()); // removing the prefix
+        args = split(str, ' '); // removing all spaces
+        commandName = args.at(0);
+        args.erase(next(args.begin(), 0));
         type = ACTION_COMMAND; // setting the type of the command
     }
 
@@ -46,8 +51,8 @@ void InputManager::RunCommand(string str) {
     // iterating for every command
     for (CommandBase* cmd : commands) {
         if (cmd->GetType() != type) continue; // if it isnt the type just skip
-        if (cmd->GetCommand() == str && cmd->GetType() == type) {
-            cmd->execute(); // executing
+        if (cmd->GetCommand() == commandName && cmd->GetType() == type) {
+            cmd->execute(args); // executing
             return;
         }
     }
@@ -77,6 +82,12 @@ bool InputManager::Update(int ch) {
     case TAB:
         if (editState == CONTROL_MODE) break;
         //currentLine = concat(currentLine, "    ");
+        break;
+    case BACKSPACE:
+        if (currentLine.empty()) break;
+        currentLine.pop_back();
+        system("clear");
+        cout << currentLine;
         break;
     case CAPSLOCK:
         break;
@@ -108,6 +119,7 @@ bool InputManager::Update(int ch) {
         }
         break;
     default:
+        // cout << ch; // for debuging
         currentLine += ch; // adding the char
         system("clear");
         cout << currentLine; // printing

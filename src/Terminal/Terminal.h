@@ -12,4 +12,8 @@ struct TerminalData {
 
 namespace Terminal {
     TerminalData GetData(); // terminal data thing
+    // void printl(string line) {
+    //     cout << line << endl;
+    //     printf("%c[%d;%df", 0x1b, 0, ); // setting the cursor pos 
+    // }
 };

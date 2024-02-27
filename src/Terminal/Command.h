@@ -2,17 +2,6 @@
 
 #pragma once
 
-// template<size_t... Indices> struct indices {};
-// template<size_t N,size_t... Is> struct build_indices : build_indices<N-1, N-1, Is...> {};
-// template<size_t... Is> struct build_indices<0, Is...> : indices<Is...> {};
-// template <typename F, typename ArgTuple, size_t... Indices> auto call(F&& f, ArgTuple&& args, const indices<Indices...>&) -> decltype(f(get<Indices>(forward<ArgTuple>(args))...)) {
-//    return move(f(get<Indices>(forward<ArgTuple>(args))...));
-// }
-// template <typename F, typename ArgTuple> auto call(F&& f, ArgTuple&& args) -> decltype(call(f, args, build_indices<tuple_size<ArgTuple>::value>{})) {
-//     const build_indices<tuple_size<ArgTuple>::value> indices;
-//     return move(call(f, move(args), indices));
-// }
-
 // commands type
 enum CommandType {
     ND = -1, // not defined type
@@ -35,22 +24,22 @@ class CommandBase {
         const CommandType GetType() { return type; } // command type getter
 
         virtual ~CommandBase() {} // (deconstructor if someone didnt know)
-        virtual void execute() = 0; // executor
+        virtual void execute(vector<string> args) = 0; // executor
 };
 
 template<typename F, typename... Args> class Command : public CommandBase {
     private:
-        function<void()> callback;
+        function<void(vector<string>&&)> callback;
     public:
         // constructor
         Command(const string& command, const string& name, const string& desc, CommandType type, const F& func, Args&&... args) : CommandBase(command, name, desc, type) {
-            callback = [func, args...](){
-                func(args...);
+            callback = [func, args...](vector<string>&& argsCMDL){
+                func(argsCMDL, args...);
             };
         }
         // executor from base
-        void execute() override {
-            callback();
+        void execute(vector<string> args) override {
+            callback(forward<vector<string>>(args)); // invoking the callback function with arguments from the user
         }
 };
 
