@@ -1,4 +1,4 @@
-# TerminalEditor C++/C
+# ByteSync-TerminalEditor C++/C
 Text or code editor in terminal (better then vim maybe)
 ## About:
 This repo's code was made in c++11 so its pain to code.
