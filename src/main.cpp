@@ -22,24 +22,25 @@ int main(int argc, char* argv[]) {
 
     if (code) return 0;
 
-    inpinit();
+    input::inpinit();
 
     bool running = true;
 
     while (running) {
-        nextFrame();
+        terminal::getInfo();
         
         if (getchar() == 'q') running = false;
-        if (sizeChanged()) {
+        if (terminal::sizeChanged()) {
 
             continue;
         }
 
-        draw();
+        
+
         usleep(10000);
     }
 
-    inpend();
+    input::inpend();
     
     return 0;
 }

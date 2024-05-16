@@ -9,31 +9,23 @@
 
 using namespace std;
 
-struct winsize w;
-struct winsize wl;
+namespace terminal {
+    struct winsize w;
+    struct winsize wl;
 
-vector<string> buffer;
+    bool sizeChanged() {
+        bool changed = (w.ws_col != wl.ws_col || w.ws_row != wl.ws_row);
 
-bool sizeChanged() {
-    bool changed = (w.ws_col != wl.ws_col || w.ws_row != wl.ws_row);
+        wl = w;
 
-    wl = w;
+        return changed;
+    }
 
-    return changed;
-}
+    void getInfo() {
+        ioctl(0, TIOCGWINSZ, &w);
+    }
 
-void termInit() {
+    void cursor(int x, int y) {
 
-}
-
-void nextFrame() {
-    ioctl(0, TIOCGWINSZ, &w);
-}
-
-void text(int x, int y, string text) {
-
-}
-
-void draw() {
-    
+    }
 }

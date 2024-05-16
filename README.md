@@ -17,3 +17,4 @@ And when it compiled then type:
 #### TODO:
 - [ ] road map?
 - [x] loading files
+- [x] basic loop with input
