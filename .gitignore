@@ -33,3 +33,5 @@
 
 #paths
 .vscode
+
+.DS_Store
