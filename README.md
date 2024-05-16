@@ -9,22 +9,11 @@ In your terminal paste this command:
 make
 ```
 And when it compiled then type:
-```
+```zsh
 ./a.out <your_file_name_here>
 ```
 #### Code has:
-- lambda or function execution in "Command.h"
-- command system with args (this ^, is almost the same but very diffrent)
-- imput system
-- terminal data thing
+- 
 #### TODO:
 - [ ] road map?
-- [x] input handling
-- [ ] lines
-- [x] command managment
-- [x] command execution
-- [x] basic commands
-- [ ] color highlithing
-- [ ] colors for terminal
-- [ ] saving and loading files
-- [ ] UI
+- [x] loading files

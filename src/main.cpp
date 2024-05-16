@@ -1,27 +1,45 @@
-#include "incld.h"
-#include "Terminal/InputManager.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 
-using namespace Terminal;
+#include "./file/file.h"
+#include "./terminal/input.h"
+#include "./terminal/terminal.h"
 
-int main(int argc, char** argv) {
-    // no files in args
+using namespace std;
+
+int main(int argc, char* argv[]) {
     if (argc <= 1) {
         cout << "No file specified, exiting." << endl;
         return 0;
     }
 
-    bool running = true;
-
-    TerminalData data = GetData(); // getting the terminal data
-    InputManager inpMgr = InputManager(data);
-
     system("clear");
 
-    // program loop
+    string contents;
+    file f = file(argv[1]);
+    int code = f.getFileContents(contents);
+
+    if (code) return 0;
+
+    inpinit();
+
+    bool running = true;
+
     while (running) {
-        char c = getchar(); // getting the char
-        running = inpMgr.Update(c); // updating and getting the output
+        nextFrame();
+        
+        if (getchar() == 'q') running = false;
+        if (sizeChanged()) {
+
+            continue;
+        }
+
+        draw();
+        usleep(10000);
     }
+
+    inpend();
     
     return 0;
 }

@@ -1,19 +1,39 @@
-#include "../incld.h"
+#include <iostream>
+#include <string>
+#include <vector>
 
-#pragma once
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <termios.h>
 
-struct TerminalData {
-    int width; // width in px
-    int height; // height in px
+using namespace std;
 
-    int widthCH; // width in chars
-    int heightCH; // height in chars
-};
+struct winsize w;
+struct winsize wl;
 
-namespace Terminal {
-    TerminalData GetData(); // terminal data thing
-    // void printl(string line) {
-    //     cout << line << endl;
-    //     printf("%c[%d;%df", 0x1b, 0, ); // setting the cursor pos 
-    // }
-};
+vector<string> buffer;
+
+bool sizeChanged() {
+    bool changed = (w.ws_col != wl.ws_col || w.ws_row != wl.ws_row);
+
+    wl = w;
+
+    return changed;
+}
+
+void termInit() {
+
+}
+
+void nextFrame() {
+    ioctl(0, TIOCGWINSZ, &w);
+}
+
+void text(int x, int y, string text) {
+
+}
+
+void draw() {
+    
+}
