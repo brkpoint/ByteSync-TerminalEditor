@@ -14,33 +14,39 @@ int main(int argc, char* argv[]) {
         return 0;
     }
 
-    system("clear");
-
     string contents;
     file f = file(argv[1]);
     int code = f.getFileContents(contents);
 
     if (code) return 0;
 
+    terminal::clear();
+
     input::inpinit();
 
     bool running = true;
 
     while (running) {
+        char ch;
+
         terminal::getInfo();
         
-        if (getchar() == 'q') running = false;
-        if (terminal::sizeChanged()) {
-
-            continue;
+        ch = getchar();
+        if (ch == 'q') {
+            running = false;
+            break;
         }
 
-        
+        if (terminal::sizeChanged()) continue;
+
+        if (ch != -1) cout << ch;
 
         usleep(10000);
     }
 
     input::inpend();
+
+    system("clear");
     
     return 0;
 }
