@@ -26,21 +26,25 @@ int main(int argc, char* argv[]) {
 
     bool running = true;
 
-    while (running) {
-        char ch;
+    char lch;
 
+    while (running) {
         terminal::getInfo();
         
-        ch = getchar();
+        char ch = getchar();
         if (ch == 'q') {
             running = false;
             break;
         }
 
-        if (terminal::sizeChanged()) continue;
+        if (terminal::sizeChanged()) {
+            terminal::clear();
+            continue;
+        }
 
-        if (ch != -1) cout << ch;
+        if (ch != -1) lch = ch;
 
+        terminal::print(0, 1, lch);
         terminal::render();
 
         usleep(10000);

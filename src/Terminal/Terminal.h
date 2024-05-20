@@ -33,12 +33,25 @@ namespace terminal {
 
     void clear() {
         system("clear");
+        buffer.clear();
         for (int i = 0; i < w.ws_row - 1; i++) {
-            printf("%s", string(w.ws_col, ' ').c_str());
+            buffer.push_back(string(w.ws_col, ' '));
         }    
     }
 
     void render() {
-        
+        for (int i = 0; i < w.ws_row - 1; i++) {
+            printf("\033[%d;%dH%s", i, 0, buffer.at(i).c_str());
+        }
+    }
+
+    void print(int x, int y, string text) {
+        for (int i = 0; i < text.length(); i++) {
+            buffer.at(y).at(x + i) = text.at(i);
+        }
+    }
+
+    void print(int x, int y, char ch) {
+        buffer.at(y).at(x) = ch;
     }
 }
