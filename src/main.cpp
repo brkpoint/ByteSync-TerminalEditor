@@ -41,6 +41,8 @@ int main(int argc, char* argv[]) {
 
         if (ch != -1) cout << ch;
 
+        terminal::render();
+
         usleep(10000);
     }
 

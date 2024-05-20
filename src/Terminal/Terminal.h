@@ -37,4 +37,8 @@ namespace terminal {
             printf("%s", string(w.ws_col, ' ').c_str());
         }    
     }
+
+    void render() {
+        
+    }
 }
