@@ -13,8 +13,9 @@ And when it compiled then type:
 ./a.out <your_file_name_here>
 ```
 #### Code has:
-- 
+- basic rendering
 #### TODO:
 - [ ] road map?
 - [x] loading files
 - [x] basic loop with input
+- [ ] a text editor?
