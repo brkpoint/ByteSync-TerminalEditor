@@ -10,7 +10,7 @@ make
 ```
 And when it compiled then type:
 ```zsh
-./a.out <your_file_name_here>
+./a.out <your_path_to_file_here>
 ```
 #### Code has:
 - basic rendering
