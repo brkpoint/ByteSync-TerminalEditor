@@ -16,6 +16,7 @@ And when it compiled then type:
 - basic rendering
 #### TODO:
 - [ ] road map?
+- [ ] colors in terminal
 - [x] loading files
 - [x] basic loop with input
 - [ ] a text editor?
