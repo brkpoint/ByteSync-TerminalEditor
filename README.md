@@ -19,4 +19,5 @@ And when it compiled then type:
 - [ ] colors in terminal
 - [x] loading files
 - [x] basic loop with input
+- [x] rendering
 - [ ] a text editor?
