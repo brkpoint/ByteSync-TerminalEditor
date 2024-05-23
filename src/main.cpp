@@ -1,10 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <chrono>
+#include <ctime>
 
 #include "./file/file.h"
 #include "./terminal/input.h"
 #include "./terminal/terminal.h"
+#include "./terminal/color.h"
 
 using namespace std;
 
@@ -26,7 +29,9 @@ int main(int argc, char* argv[]) {
 
     bool running = true;
 
-    char lch;
+    
+
+    string input = "";
 
     while (running) {
         terminal::getInfo();
@@ -42,12 +47,16 @@ int main(int argc, char* argv[]) {
             continue;
         }
 
-        if (ch != -1) lch = ch;
+        if (ch != -1) {
+            input += ch;
+        }
 
-        terminal::print(0, 1, lch);
+        
+
+        terminal::print(0, 1, input);
         terminal::render();
 
-        usleep(10000);
+        usleep(1000);
     }
 
     input::inpend();
