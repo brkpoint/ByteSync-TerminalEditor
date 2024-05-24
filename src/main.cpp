@@ -29,10 +29,6 @@ int main(int argc, char* argv[]) {
 
     bool running = true;
 
-    
-
-    string input = "";
-
     while (running) {
         terminal::getInfo();
         
@@ -48,15 +44,12 @@ int main(int argc, char* argv[]) {
         }
 
         if (ch != -1) {
-            input += ch;
+            cout << ch;
         }
 
-        
+        //terminal::print(0, 1, input);
 
-        terminal::print(0, 1, input);
-        terminal::render();
-
-        usleep(1000);
+        //usleep(1000);
     }
 
     input::inpend();

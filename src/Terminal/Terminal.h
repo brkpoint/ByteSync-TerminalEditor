@@ -13,8 +13,6 @@ namespace terminal {
     struct winsize w;
     struct winsize wl;
 
-    vector<string> buffer;
-
     bool sizeChanged() {
         bool changed = (w.ws_col != wl.ws_col || w.ws_row != wl.ws_row);
 
@@ -28,30 +26,18 @@ namespace terminal {
     }
 
     void cursor(int x, int y) {
-        //printf("\033[%d;%dH", y, x);
+        printf("\033[%d;%dH", y, x);
     }
 
     void clear() {
         system("clear");
-        buffer.clear();
         for (int i = 0; i < w.ws_row - 1; i++) {
-            buffer.push_back(string(w.ws_col, ' '));
-        }    
-    }
-
-    void render() {
-        for (int i = 0; i < w.ws_row - 1; i++) {
-            printf("\033[%d;%dH%s", i, 0, buffer.at(i).c_str());
+            printf(string(w.ws_col, ' ').c_str());
         }
+        terminal::cursor(0, 1);
     }
 
     void print(int x, int y, string text) {
-        for (int i = 0; i < text.length(); i++) {
-            buffer.at(y).at(x + i) = text.at(i);
-        }
-    }
-
-    void print(int x, int y, char ch) {
-        buffer.at(y).at(x) = ch;
+        printf("\033[%d;%dH%s", y, x, text.c_str());
     }
 }
