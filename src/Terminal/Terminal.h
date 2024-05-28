@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -6,6 +8,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <termios.h>
+
+#include "../utils/string.h"
 
 using namespace std;
 
@@ -26,18 +30,25 @@ namespace terminal {
     }
 
     void cursor(int x, int y) {
-        printf("\033[%d;%dH", y, x);
+        printf("\033[%d;%dH", y + 1, x + 1);
     }
 
     void clear() {
         system("clear");
         for (int i = 0; i < w.ws_row - 1; i++) {
-            printf(string(w.ws_col, ' ').c_str());
+            printf("%s", string(w.ws_col, ' ').c_str());
         }
-        terminal::cursor(0, 1);
     }
 
-    void print(int x, int y, string text) {
-        printf("\033[%d;%dH%s", y, x, text.c_str());
+    template<class T> void print(int x, int y, T text) {
+        printf("\033[%d;%dH%s", y + 1, x + 1, utils::to_string(text).c_str());
+    }
+
+    void hideCursor() {
+        cout << "\x1b[?25l" << flush;
+    }
+
+    void showCursor() {
+        cout << "\x1b[?25h" << flush;
     }
 }

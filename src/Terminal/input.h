@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <sys/ioctl.h>
 #include <unistd.h>
@@ -9,7 +11,7 @@ namespace input {
     int oldf;
 
     void inpinit() {
-        //cout << "\x1b[?25l" << flush;
+        cout << "\x1b[?25l" << flush;
         system("stty raw");
         tcgetattr(STDIN_FILENO, &oldt);
         newt = oldt;
@@ -23,6 +25,6 @@ namespace input {
         tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
         fcntl(STDIN_FILENO, F_SETFL, oldf);
         system("stty cooked");
-        //cout << "\x1b[?25h" << flush;
+        cout << "\x1b[?25h" << flush;
     }
 }

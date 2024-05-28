@@ -29,27 +29,42 @@ int main(int argc, char* argv[]) {
 
     bool running = true;
 
+    string inp = "";
+
+    int posx = 0;
+    int posy = 0;
+
     while (running) {
         terminal::getInfo();
-        
-        char ch = getchar();
-        if (ch == 'q') {
-            running = false;
-            break;
-        }
+
+        // resize detection
 
         if (terminal::sizeChanged()) {
             terminal::clear();
+            {
+                terminal::print(0, 0, f.fullname + " " + to_string(posy) + ":" + to_string(posx));
+            }
+            terminal::cursor(0, 1);
             continue;
         }
 
-        if (ch != -1) {
-            cout << ch;
+        // char proccessing
+
+        char ch = getchar();
+
+        switch (ch) {
+            case -1:
+                break;
+            case 'q':
+                running = false;
+                terminal::clear();
+                break;
+            default:
+                terminal::print(0, 1, (int)ch);
+                //cout << ch;
+                posx++;
+                break;
         }
-
-        //terminal::print(0, 1, input);
-
-        //usleep(1000);
     }
 
     input::inpend();

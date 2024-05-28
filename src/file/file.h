@@ -1,8 +1,10 @@
+#pragma once
+
 #include <iostream>
 #include <fstream>
 #include <string>
 
-#include "../utils/split.h"
+#include "../utils/string.h"
 
 using namespace std;
 
@@ -16,10 +18,10 @@ public:
     file(string path) {
         this->path = path;
 
-        vector<string> fpath = split(path, "/");
+        vector<string> fpath = utils::split(path, "/");
         this->fullname = fpath.at(fpath.size() - 1);
 
-        vector<string> fname = split(fullname, ".");
+        vector<string> fname = utils::split(fullname, ".");
         this->name = fname.at(0);
         this->ext = fname.at(fname.size() - 1);
     }
