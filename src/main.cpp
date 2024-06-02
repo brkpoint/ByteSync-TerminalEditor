@@ -48,6 +48,10 @@ int main(int argc, char* argv[]) {
             continue;
         }
 
+        // rendering
+
+        terminal::print(0, 0, f.fullname + " " + to_string(posy) + ":" + to_string(posx));
+        
         // char proccessing
 
         char ch = getchar();
@@ -60,9 +64,9 @@ int main(int argc, char* argv[]) {
                 terminal::clear();
                 break;
             default:
-                terminal::print(0, 1, (int)ch);
+                //terminal::print(0, 1, to_string((int)ch) + " ");
                 //cout << ch;
-                posx++;
+                //posx++;
                 break;
         }
     }
