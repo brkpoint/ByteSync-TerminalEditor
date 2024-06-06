@@ -9,6 +9,7 @@ In your terminal paste this command:
 make
 ```
 And when it compiled then type:
+* its going to work like this *
 ```zsh
 ./a.out <your_path_to_file_here>
 ```
@@ -17,7 +18,7 @@ And when it compiled then type:
 #### TODO:
 - [ ] road map?
 - [ ] colors in terminal
-- [x] loading files
-- [x] basic loop with input
-- [x] rendering
+- [ ] loading files
+- [ ] basic loop with input
+- [ ] rendering
 - [ ] a text editor?
