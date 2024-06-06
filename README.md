@@ -13,8 +13,6 @@ And when it compiled then type:
 ```zsh
 ./a.out <your_path_to_file_here>
 ```
-#### Code has:
-- basic rendering
 #### TODO:
 - [ ] road map?
 - [ ] colors in terminal
