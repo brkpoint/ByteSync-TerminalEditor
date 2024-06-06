@@ -11,7 +11,7 @@ namespace input {
     int oldf;
 
     void inpinit() {
-        cout << "\x1b[?25l" << flush;
+        //cout << "\x1b[?25l" << flush;
         system("stty raw");
         tcgetattr(STDIN_FILENO, &oldt);
         newt = oldt;
